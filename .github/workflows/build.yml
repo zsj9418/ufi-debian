@@ -1,4 +1,4 @@
-name: Build debian
+name: ufi001c debian
 on: push
 
 jobs:
