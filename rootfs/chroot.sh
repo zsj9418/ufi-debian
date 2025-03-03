@@ -2,7 +2,7 @@
 
 LANG_TARGET=en_US.UTF-8
 PASSWORD=1234
-NAME=ufi003
+NAME=ufi001c
 PARTUUID=a7ab80e8-e9d1-e8cd-f157-93f69b1d141e
 
 cat <<EOF > /etc/apt/sources.list
@@ -45,7 +45,7 @@ cat <<EOF > /tmp/info.md
 - 内核版本: ${vmlinuz_name#*-}
 - 默认用户名: root
 - 默认密码: $PASSWORD
-- WiFi名称: openstick-failsafe
+- WiFi名称: 4G-WIFI
 - WiFi密码: 12345678
 EOF
 rm -rf /etc/ssh/ssh_host_* /var/lib/apt/lists
