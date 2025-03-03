@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 
 DIST=bookworm
 BOOT_URL="https://github.com/KyonLi/ufi003-kernel/releases/download/6.6.60-1/boot.img"
@@ -6,7 +6,7 @@ BOOT_NO_MODEM_URL="https://github.com/KyonLi/ufi003-kernel/releases/download/6.6
 BOOT_NO_MODEM_OC_URL="https://github.com/KyonLi/ufi003-kernel/releases/download/6.6.60-1/boot-no-modem-oc.img"
 K_IMAGE_DEB_URL="https://github.com/KyonLi/ufi003-kernel/releases/download/6.6.60-1/linux-image-6.6.60-msm8916-g32b5a619bbf5_6.6.60-g32b5a619bbf5-1_arm64.deb"
 K_DEV_URL="https://github.com/KyonLi/ufi003-kernel/releases/tag/6.6.60-1"
-UUID=62ae670d-01b7-4c7d-8e72-60bcd00410b7
+UUID=a7ab80e8-e9d1-e8cd-f157-93f69b1d141e
 
 if [ `id -u` -ne 0 ]
   then echo "Please run as root"
@@ -39,14 +39,10 @@ echo >> info.md
 echo "🔗 [linux-headers & linux-libc-dev]($K_DEV_URL)" >> info.md
 rm -rf debian/tmp/* debian/root/.bash_history > /dev/null 2>&1
 
-#echo -e "\n\nNow you can make additional modifications to rootfs.\nPress ENTER to continue"
-#head -n 1 >/dev/null
-
-#dd if=/dev/zero of=debian-ufi003.img bs=1M count=$(( $(df -m --output=used debian | tail -1 | awk '{print $1}') + 100 ))
-dd if=/dev/zero of=debian-ufi003.img bs=1M count=$(( $(du -ms debian | cut -f1) + 100 ))
-mkfs.ext4 -L rootfs -U $UUID debian-ufi003.img
-mount debian-ufi003.img build
+dd if=/dev/zero of=debian-ufi001c.img bs=1M count=$(( $(du -ms debian | cut -f1) + 100 ))
+mkfs.ext4 -L rootfs -U $UUID debian-ufi001c.img
+mount debian-ufi001c.img build
 rsync -aH debian/ build/
 umount build
-img2simg debian-ufi003.img rootfs.img
-rm -rf debian-ufi003.img debian build > /dev/null 2>&1
+img2simg debian-ufi001c.img rootfs.img
+rm -rf debian-ufi001c.img debian build > /dev/null 2>&1
